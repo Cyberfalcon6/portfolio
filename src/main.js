@@ -1,4 +1,7 @@
 import { createApp } from 'vue'
-import App from './App.vue'
+import router from './router';
+import FrameWork from './FrameWork.vue';
 
-createApp(App).mount('#app')
+const app = createApp(FrameWork);
+app.use(router)
+app.mount("#app")
