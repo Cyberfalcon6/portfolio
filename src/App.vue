@@ -9,22 +9,21 @@
     </nav>
     <nav id="nav-big">
       <div class="logo padded">0X3B</div>
-      <div class="offers nav-link">Offers</div>
-      <div class="stack nav-link">Tech Stack</div>
-      <div class="work nav-link">My Work</div>
+      <!-- <div class="offers nav-link">Offers</div> -->
+      <!-- <div class="stack nav-link">Tech Stack</div> -->
       <div class="testimonials nav-link">Testimonials</div>
+      <div class="work nav-link" :class="{'visible':selected=='work'}">My Work</div>
       <div class="contact nav-link">Contact</div>
     </nav>
 
-    <!-- Sections with professional layout -->
     <div id="sections" >
       <!-- Introduction -->
       <section class="section">
         <div class="intro-layout">
           <div class="group">
             <div class="greeting">Hey</div>
-            <div class="introduction">I'm <span class="name">Japhet</span></div>
-            <div class="role">A full-stack web developer &lt;/> based in Kigali</div>
+            <div class="introduction">I'm <span class="name">{{ name }}</span></div>
+            <div class="role">{{ role }}</div>
             <button class="cta-button">Let's Collaborate</button>
             <button class="cta-button" style="background-color: black;">See Projects</button>
           </div>
@@ -32,8 +31,8 @@
         </div>
       </section>
 
-      <!-- Work -->
-<section class="section">
+   <!-- Work -->
+<!-- <section class="section">
   <div class="section-content">
     <h2><font-awesome-icon :icon="faBriefcase" /> <span class="highlight">Featured Projects</span></h2>
     <p class="subhead">A few things I've built recently:</p>
@@ -61,10 +60,10 @@
   </div>
 </div>
 </div>
-</section>
+</section> -->
 
 <!-- Stack -->
-<section class="section">
+<!-- <section class="section">
   <div class="section-content">
     <h2><font-awesome-icon :icon="faToolbox" /> <span class="highlight">Tech Toolbox</span></h2>
     <p class="subhead">My favorite tools and frameworks:</p>
@@ -77,10 +76,10 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
 <!-- Testimonials -->
-<section class="section">
+<!-- <section class="section">
   <div class="section-content">
     <h2><font-awesome-icon :icon="faCommentDots" /> <span class="highlight">Client Feedback</span></h2>
     <div class="carousel">
@@ -95,10 +94,10 @@
     </div>
   </div>
 </section>
-  
+   -->
 
 <!-- Contact -->
-<section class="section">
+<!-- <section class="section">
   <div class="section-content">
     <h2><font-awesome-icon :icon="faEnvelope" /> <span class="highlight">Let's Work Together</span></h2>
     <form class="contact-form">
@@ -108,34 +107,37 @@
       <button type="submit">🚀 Send Message</button>
     </form>
   </div>
-</section>
-    </div>
+</section> -->
+    </div> 
 
     <!-- Footer Waves -->
-    <div class="footer">
+    <!-- <div class="footer">
       <img src="./assets/yellow-wave.png" id="w1" class="yellow-wave" alt="">
       <img src="./assets/yellow-wave.png" id="w2" class="yellow-wave" alt="">
       <img src="./assets/yellow-wave.png" id="w3" class="yellow-wave" alt="">
       <img src="./assets/yellow-wave.png" id="w4" class="yellow-wave" alt="">
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+//import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faBriefcase, faToolbox, faCommentDots, faEnvelope } from '@fortawesome/free-solid-svg-icons'
 export default {
   components: {
-    FontAwesomeIcon
+    // FontAwesomeIcon
   },
   name: "App",
   data() {
     return {
       faBriefcase,
       faToolbox,
+      name: "",
       faCommentDots,
       faEnvelope,
+      selected: "work",
       imageScale: 1,
+      role: "",
       skills: [
         { name: 'Vue.js', value: 0 },
         { name: 'Node.js', value: 0 },
@@ -150,12 +152,36 @@ export default {
     document.addEventListener('mousemove', this.handleMouseMove);
     window.addEventListener('scroll', this.animateSkills);
     this.animateSkills();
+    this.animateName();
+
   },
   unmounted() {
     document.removeEventListener('mousemove', this.handleMouseMove);
     window.removeEventListener('scroll', this.animateSkills);
   },
   methods: {
+    animateName(){
+      const name = "Japhet";
+      const role = "A full-stack web developer </> based in Kigali";
+      var index = 0;
+      var index2 = 0;
+      const intervalId = setInterval(() => {
+        this.name = this.name + name[index];
+        index++;
+        if(index>=name.length){
+          clearInterval(intervalId);
+        }
+      }, 80);
+      setTimeout(() => {
+        const intervalId2 = setInterval(() => {
+        this.role = this.role + role[index2];
+        index2++;
+        if(index2>=role.length){
+          clearInterval(intervalId2);
+        }
+      }, 80);
+      }, 490);
+    },
     animateSkills() {
       const stackSection = document.querySelector('.tech-icons');
       if (!stackSection) return;
@@ -230,6 +256,15 @@ body {
 
 #nav-big {
   display: none;
+}
+
+.visible{
+  /* background-color: var(--tertiary); */
+  color: var(--primary);
+  min-width: 150px;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
 }
 
 @media (min-width: 768px) {
