@@ -11,59 +11,61 @@
       <div class="logo padded">0X3B</div>
       <!-- <div class="offers nav-link">Offers</div> -->
       <!-- <div class="stack nav-link">Tech Stack</div> -->
-      <div class="testimonials nav-link">Testimonials</div>
-      <div class="work nav-link" :class="{'visible':selected=='work'}">My Work</div>
-      <div class="contact nav-link">Contact</div>
+      <div class="contact nav-link" :class="{ 'visible': selected == 'about' }" v-on:click="selected = 'about'"> About Me</div>
+      <div class="work nav-link" :class="{ 'visible': selected == 'work' }" v-on:click="selected = 'work'">My Work</div>
+      <div class="testimonials nav-link" :class="{ 'visible': selected == 'testimonials' }"
+        v-on:click="selected = 'testimonials'">Testimonials</div>
     </nav>
 
-    <div id="sections" >
+    <div id="sections">
       <!-- Introduction -->
-      <section class="section">
+      <section class="section" v-if="selected=='about'">
         <div class="intro-layout">
           <div class="group">
             <div class="greeting">Hey</div>
             <div class="introduction">I'm <span class="name">{{ name }}</span></div>
-            <div class="role">{{ role }}</div>
-            <button class="cta-button">Let's Collaborate</button>
-            <button class="cta-button" style="background-color: black;">See Projects</button>
+            <div class="role" :class="{ 'zoom': zoom }" id="role">{{ role }}</div>
+            <button class="cta-button">Get in touch</button>
+            <button class="cta-button2" style="background-color: black;">See Projects</button>
           </div>
-          <img src="./assets/developer-illustration.png" id="illustration" :style="{ transform: `scale(${imageScale})` }" alt="Hero illustration">
+          <img src="./assets/developer-illustration.png" id="illustration"
+            :style="{ transform: `scale(${imageScale})` }" alt="Hero illustration">
         </div>
       </section>
 
-   <!-- Work -->
-<!-- <section class="section">
-  <div class="section-content">
-    <h2><font-awesome-icon :icon="faBriefcase" /> <span class="highlight">Featured Projects</span></h2>
-    <p class="subhead">A few things I've built recently:</p>
-    <div class="project-grid">
-  <div class="project-card featured">
-    <img src="./assets/portfolio.png" alt="Portfolio Website">
-    <div class="project-info">
-      <h3>Portfolio Website</h3>
-      <p>Vue-based personal brand site with smooth animations and scroll effects.</p>
-    </div>
-  </div>
-  <div class="project-card">
-    <img src="./assets/ecommerce.webp" alt="E-commerce Platform">
-    <div class="project-info">
-      <h3>E-commerce Platform</h3>
-      <p>Full-stack store using Node.js, Stripe, and MongoDB, built for scale.</p>
-    </div>
-  </div>
-  <div class="project-card">
-    <img src="./assets/chatapp.jpg" alt="Chat App">
-    <div class="project-info">
-      <h3>Real-time Chat App</h3>
-      <p>Socket.io-powered messaging with Vue.js front-end and JWT auth.</p>
-    </div>
-  </div>
-</div>
-</div>
-</section> -->
+      <!-- Work -->
+      <section class="section" v-if="selected == 'work'">
+        <div class="section-content">
+          <!-- <h2><font-awesome-icon :icon="faBriefcase" /> <span class="highlight">Featured Projects</span></h2> -->
+          <p class="subhead">A few things I've built recently</p>
+          <div class="project-grid">
+            <div class="project-card">
+              <img src="./assets/portfolio.png" alt="Portfolio Website">
+              <div class="project-info">
+                <h3>Portfolio Website</h3>
+                <p>Vue-based personal brand site with smooth animations and scroll effects.</p>
+              </div>
+            </div>
+            <div class="project-card">
+              <img src="./assets/ecommerce.webp" alt="E-commerce Platform">
+              <div class="project-info">
+                <h3>E-commerce Platform</h3>
+                <p>Full-stack store using Node.js, Stripe, and MongoDB, built for scale.</p>
+              </div>
+            </div>
+            <div class="project-card">
+              <img src="./assets/chatapp.jpg" alt="Chat App">
+              <div class="project-info">
+                <h3>Real-time Chat App</h3>
+                <p>Socket.io-powered messaging with Vue.js front-end and JWT auth.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-<!-- Stack -->
-<!-- <section class="section">
+      <!-- Stack -->
+      <!-- <section class="section">
   <div class="section-content">
     <h2><font-awesome-icon :icon="faToolbox" /> <span class="highlight">Tech Toolbox</span></h2>
     <p class="subhead">My favorite tools and frameworks:</p>
@@ -78,8 +80,8 @@
   </div>
 </section> -->
 
-<!-- Testimonials -->
-<!-- <section class="section">
+      <!-- Testimonials -->
+      <!-- <section class="section">
   <div class="section-content">
     <h2><font-awesome-icon :icon="faCommentDots" /> <span class="highlight">Client Feedback</span></h2>
     <div class="carousel">
@@ -96,8 +98,8 @@
 </section>
    -->
 
-<!-- Contact -->
-<!-- <section class="section">
+      <!-- Contact -->
+      <!-- <section class="section">
   <div class="section-content">
     <h2><font-awesome-icon :icon="faEnvelope" /> <span class="highlight">Let's Work Together</span></h2>
     <form class="contact-form">
@@ -108,7 +110,7 @@
     </form>
   </div>
 </section> -->
-    </div> 
+    </div>
 
     <!-- Footer Waves -->
     <!-- <div class="footer">
@@ -135,7 +137,8 @@ export default {
       name: "",
       faCommentDots,
       faEnvelope,
-      selected: "work",
+      zoom: false,
+      selected: "about",
       imageScale: 1,
       role: "",
       skills: [
@@ -150,17 +153,35 @@ export default {
   },
   mounted() {
     document.addEventListener('mousemove', this.handleMouseMove);
-    window.addEventListener('scroll', this.animateSkills);
+    window.addEventListener('wheel', this.switchSections);
     this.animateSkills();
     this.animateName();
+    // this.zoom = true;
 
   },
   unmounted() {
     document.removeEventListener('mousemove', this.handleMouseMove);
-    window.removeEventListener('scroll', this.animateSkills);
+    window.removeEventListener('scroll', this.switchSections()
+    );
+
   },
   methods: {
-    animateName(){
+    switchSections(Event) {
+      
+        if(Event.deltaY > 55 || Event.deltaY < -55){
+          if (this.selected == 'about') {
+          this.selected = 'work';
+        }
+        else if (this.selected == 'work') {
+          this.selected = 'testimonials';
+        }
+        else {
+          this.selected = 'about';
+        }
+        }
+      
+    },
+    animateName() {
       const name = "Japhet";
       const role = "A full-stack web developer </> based in Kigali";
       var index = 0;
@@ -168,19 +189,21 @@ export default {
       const intervalId = setInterval(() => {
         this.name = this.name + name[index];
         index++;
-        if(index>=name.length){
+        if (index >= name.length) {
           clearInterval(intervalId);
         }
-      }, 80);
+      }, 25);
       setTimeout(() => {
         const intervalId2 = setInterval(() => {
-        this.role = this.role + role[index2];
-        index2++;
-        if(index2>=role.length){
-          clearInterval(intervalId2);
-        }
-      }, 80);
-      }, 490);
+          this.role = this.role + role[index2];
+          index2++;
+          if (index2 >= role.length) {
+            this.zoom = true;
+            clearInterval(intervalId2);
+
+          }
+        }, 25);
+      }, 160);
     },
     animateSkills() {
       const stackSection = document.querySelector('.tech-icons');
@@ -201,15 +224,17 @@ export default {
       }
     },
     handleMouseMove(e) {
-      const container = document.querySelector('.intro-layout');
+      if(this.selected=='about'){
+        const container = document.querySelector('.intro-layout');
       const illustration = document.querySelector('#illustration');
       const rect = container.getBoundingClientRect();
       const x = (e.clientX - rect.left - rect.width / 2) / 30;
       const y = (e.clientY - rect.top - rect.height / 2) / 30;
       illustration.style.transform = `scale(${this.imageScale}) translate(${x}px, ${y}px)`;
+      }
     }
   }
-      }
+}
 </script>
 
 <style>
@@ -240,6 +265,28 @@ body {
   flex-direction: column;
 }
 
+@keyframes lightning {
+  0% {
+    opacity: 1;
+  }
+
+  25% {
+    opacity: .7;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  75% {
+    opacity: .7;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
 /* Navigation */
 #nav-small,
 #nav-big {
@@ -254,23 +301,46 @@ body {
   background: white;
 }
 
+.zoom {
+  animation: zoom 1.2s ease-out;
+  color: gray !important;
+}
+
 #nav-big {
   display: none;
 }
 
-.visible{
-  /* background-color: var(--tertiary); */
+@keyframes zoom {
+  0% {
+    transform: scale(1);
+  }
+
+  85% {
+    transform: scale(1.3);
+  }
+
+  /* 90%{
+    transform: scale(1.2);
+  } */
+  100% {
+    transform: scale(1);
+  }
+}
+
+.visible {
   color: var(--primary);
-  min-width: 150px;
-  font-size: 20px;
+  font-size: 18px !important;
   display: flex;
   justify-content: center;
+  box-shadow: 1px 1px 10px -5px #5635c5;
+  background-color: #5735c529;
 }
 
 @media (min-width: 768px) {
   #nav-small {
     display: none;
   }
+
   #nav-big {
     display: flex;
   }
@@ -280,9 +350,12 @@ body {
   margin: 0 0.75rem;
   cursor: pointer;
   padding: 10px;
-  border-radius: 10px;
+  font-weight: 600;
+  font-size: 15px;
+  border-radius: 5px;
   transition: all 0.3s;
 }
+
 .nav-link:hover {
   color: var(--primary);
 }
@@ -316,7 +389,7 @@ body {
 
 .section-content {
   /* max-width: 900px; */
-  text-align: center;
+  width: 100%;
 }
 
 .intro-layout {
@@ -338,20 +411,38 @@ body {
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
 }
+
 .introduction {
   font-size: 3rem;
   font-weight: 600;
 }
+
 .name {
   color: var(--primary);
 }
+
 .role {
   font-size: 1.2rem;
-  color: #555;
+  color: black;
   margin: 1rem 0;
+  font-weight: 600;
+  transition: all .2s ease-in;
 }
 
 .cta-button {
+  background: var(--primary);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  margin: 5px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  animation: lightning 1.5s 2;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.cta-button2 {
   background: var(--primary);
   color: white;
   padding: 0.75rem 1.5rem;
@@ -381,6 +472,7 @@ body {
   margin-top: 2rem;
   text-align: left;
 }
+
 .projects li {
   list-style: none;
   padding: 1rem;
@@ -388,6 +480,7 @@ body {
   background: white;
   box-shadow: 0 4px 10px var(--shadow);
 }
+
 .projects li strong {
   display: block;
   color: var(--primary);
@@ -401,6 +494,7 @@ body {
   gap: 1rem;
   margin-top: 2rem;
 }
+
 .tech-icons span {
   background: var(--primary);
   color: white;
@@ -416,6 +510,7 @@ blockquote {
   color: #444;
   margin: 1rem 0;
 }
+
 cite {
   color: #999;
   font-size: 0.9rem;
@@ -428,6 +523,7 @@ cite {
   max-width: 500px;
   margin: 2rem auto 0;
 }
+
 .contact-form input,
 .contact-form textarea {
   padding: 1rem;
@@ -436,6 +532,7 @@ cite {
   font-size: 1rem;
   resize: vertical;
 }
+
 .contact-form button {
   background: var(--primary);
   color: white;
@@ -446,6 +543,7 @@ cite {
   cursor: pointer;
   transition: background 0.3s;
 }
+
 .contact-form button:hover {
   background: #5635c5;
 }
@@ -458,20 +556,49 @@ cite {
   height: 90px;
   pointer-events: none;
 }
+
 .yellow-wave {
   position: absolute;
   left: -30px;
   animation: waveMotion 4s ease-in-out infinite;
 }
+
 @keyframes waveMotion {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(8px); }
-  100% { transform: translateY(0); }
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(8px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
 }
-#w1 { transform: scale(2, 1); animation-delay: 0s; }
-#w2 { transform: scale(2, 1) translateX(20px) rotate(3deg); opacity: .8; animation-delay: 0.2s; }
-#w3 { transform: scale(3, 1) translateX(30px) translateY(60px) rotate(20deg); opacity: .7; animation-delay: 0.4s; }
-#w4 { transform: scale(3, 1) translateX(90px) rotate(35deg) translateY(50px); opacity: .6; animation-delay: 0.6s; }
+
+#w1 {
+  transform: scale(2, 1);
+  animation-delay: 0s;
+}
+
+#w2 {
+  transform: scale(2, 1) translateX(20px) rotate(3deg);
+  opacity: .8;
+  animation-delay: 0.2s;
+}
+
+#w3 {
+  transform: scale(3, 1) translateX(30px) translateY(60px) rotate(20deg);
+  opacity: .7;
+  animation-delay: 0.4s;
+}
+
+#w4 {
+  transform: scale(3, 1) translateX(90px) rotate(35deg) translateY(50px);
+  opacity: .6;
+  animation-delay: 0.6s;
+}
 
 .highlight {
   color: var(--primary);
@@ -479,8 +606,9 @@ cite {
 }
 
 .subhead {
-  font-size: 1rem;
+  font-size: 1.2rem;
   color: #666;
+  font-weight: 600;
   margin-bottom: 1.5rem;
 }
 
@@ -488,21 +616,25 @@ cite {
   margin: 0.25rem 0 0;
   color: #555;
 }
+
 .skill-bar {
   margin: 1rem 0;
   width: 100%;
 }
+
 .skill-bar label {
   font-weight: 600;
   margin-bottom: 0.5rem;
   display: block;
 }
+
 .bar {
   height: 10px;
   background: #ddd;
   border-radius: 5px;
   overflow: hidden;
 }
+
 .fill {
   height: 100%;
   background: var(--primary);
@@ -510,6 +642,7 @@ cite {
   transition: width 1.5s ease;
   border-radius: 5px;
 }
+
 .carousel {
   position: relative;
   width: 100%;
@@ -517,29 +650,45 @@ cite {
   max-width: 600px;
   margin: auto;
 }
+
 .slide {
   display: none;
   animation: fadeIn 1s ease-in-out;
 }
+
 .slide.active {
   display: block;
 }
+
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
+
 .project-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
 }
 
 .project-card {
   background: white;
   padding: 2rem;
+  max-width: 300px;
+  margin: 10px;
+  cursor: pointer;
   border-radius: 12px;
-  box-shadow: 0 8px 20px var(--shadow);
+  box-shadow: 1px 2px 15px -3px var(--primary);
   text-align: left;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -552,11 +701,13 @@ cite {
 .project-card h3 {
   color: var(--primary);
   margin-bottom: 0.75rem;
+  font-weight: 600;
   font-size: 1.25rem;
 }
 
 .project-card p {
-  color: #555;
+  color: #6b6b6b;
+  font-weight: 500;
   line-height: 1.4;
 }
 
@@ -576,11 +727,7 @@ cite {
   grid-row: span 2;
 }
 
-.project-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-}
+
 
 .footer {
   z-index: -1;
