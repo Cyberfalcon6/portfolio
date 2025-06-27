@@ -1,11 +1,25 @@
 import { createWebHistory, createRouter } from "vue-router";
 import App from "@/App.vue";
 import BigScreen from "@/BigScreen.vue";
+import LandingPage from "@/components/LandingPage.vue";
+import ProjectsView from "@/components/ProjectsView.vue"
 const routes = [
     {
         path: "/",
         name: "home",
-        component: App
+        component: App,
+        children: [
+            {
+                path:"about",
+                name: "about",
+                component: LandingPage
+            },
+            {
+                path:"projects",
+                name: "projects",
+                component: ProjectsView
+            },
+        ]
     },
     {
         path: "/big",

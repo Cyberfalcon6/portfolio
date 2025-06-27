@@ -3,130 +3,31 @@
   <div id="shell">
     <!-- Responsive Navigation -->
     <nav id="nav-small">
-      <div class="logo padded">0X3B</div>
-      <div class="work padded">My Work</div>
-      <div class="contact padded">Reach me</div>
+      <div class="logo padded"> 0X3B </div>
+      <div class="work padded"> My Work </div>
+      <div class="contact padded"> Reach me </div>
     </nav>
     <nav id="nav-big">
       <div class="logo padded">0X3B</div>
-      <!-- <div class="offers nav-link">Offers</div> -->
-      <!-- <div class="stack nav-link">Tech Stack</div> -->
-      <div class="contact nav-link" :class="{ 'visible': selected == 'about' }" v-on:click="selected = 'about'"> About Me</div>
-      <div class="work nav-link" :class="{ 'visible': selected == 'work' }" v-on:click="selected = 'work'">My Work</div>
-      <div class="testimonials nav-link" :class="{ 'visible': selected == 'testimonials' }"
-        v-on:click="selected = 'testimonials'">Testimonials</div>
+       <router-link to="/about" class="router-link"><div class="contact nav-link" :class="{ 'visible': $route.fullPath == '/about' }" v-on:click="selected = 'about'"> About me </div></router-link>
+       <router-link to="/projects" class="router-link"> <div class="work nav-link" :class="{ 'visible': $route.fullPath == '/projects' }" v-on:click="selected = 'work'"> My Work
+      </div></router-link>
+        
+     
+      <div class="testimonials nav-link" :class="{ 'visible': $route.fullPath == '/testimonials' }"
+        v-on:click="selected = 'testimonials'"> Testimonials </div>
     </nav>
-
     <div id="sections">
-      <!-- Introduction -->
-      <section class="section" v-if="selected=='about'">
-        <div class="intro-layout">
-          <div class="group">
-            <div class="greeting">Hey</div>
-            <div class="introduction">I'm <span class="name">{{ name }}</span></div>
-            <div class="role" :class="{ 'zoom': zoom }" id="role">{{ role }}</div>
-            <button class="cta-button">Get in touch</button>
-            <button class="cta-button2" style="background-color: black;">See Projects</button>
-          </div>
-          <img src="./assets/developer-illustration.png" id="illustration"
-            :style="{ transform: `scale(${imageScale})` }" alt="Hero illustration">
-        </div>
-      </section>
-
-      <!-- Work -->
-      <section class="section" v-if="selected == 'work'">
-        <div class="section-content">
-          <!-- <h2><font-awesome-icon :icon="faBriefcase" /> <span class="highlight">Featured Projects</span></h2> -->
-          <p class="subhead">A few things I've built recently</p>
-          <div class="project-grid">
-            <div class="project-card">
-              <img src="./assets/portfolio.png" alt="Portfolio Website">
-              <div class="project-info">
-                <h3>Portfolio Website</h3>
-                <p>Vue-based personal brand site with smooth animations and scroll effects.</p>
-              </div>
-            </div>
-            <div class="project-card">
-              <img src="./assets/ecommerce.webp" alt="E-commerce Platform">
-              <div class="project-info">
-                <h3>E-commerce Platform</h3>
-                <p>Full-stack store using Node.js, Stripe, and MongoDB, built for scale.</p>
-              </div>
-            </div>
-            <div class="project-card">
-              <img src="./assets/chatapp.jpg" alt="Chat App">
-              <div class="project-info">
-                <h3>Real-time Chat App</h3>
-                <p>Socket.io-powered messaging with Vue.js front-end and JWT auth.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Stack -->
-      <!-- <section class="section">
-  <div class="section-content">
-    <h2><font-awesome-icon :icon="faToolbox" /> <span class="highlight">Tech Toolbox</span></h2>
-    <p class="subhead">My favorite tools and frameworks:</p>
-    <div class="tech-icons">
-      <div v-for="skill in skills" :key="skill.name" class="skill-bar">
-        <label>{{ skill.name }}</label>
-        <div class="bar">
-          <div class="fill" :style="{ width: skill.value + '%' }"></div>
-        </div>
-      </div>
+      <RouterView />
     </div>
-  </div>
-</section> -->
-
-      <!-- Testimonials -->
-      <!-- <section class="section">
-  <div class="section-content">
-    <h2><font-awesome-icon :icon="faCommentDots" /> <span class="highlight">Client Feedback</span></h2>
-    <div class="carousel">
-      <div class="slide active">
-        <blockquote>“Japhet delivered the project ahead of schedule with perfect execution and exceeded expectations.”</blockquote>
-        <cite>– Alex M., Product Manager</cite>
-      </div>
-      <div class="slide">
-        <blockquote>“A fantastic developer with an eye for design. Highly recommended!”</blockquote>
-        <cite>– Marie C., Designer</cite>
-      </div>
-    </div>
-  </div>
-</section>
-   -->
-
-      <!-- Contact -->
-      <!-- <section class="section">
-  <div class="section-content">
-    <h2><font-awesome-icon :icon="faEnvelope" /> <span class="highlight">Let's Work Together</span></h2>
-    <form class="contact-form">
-      <input type="text" placeholder="👤 Your Name" required>
-      <input type="email" placeholder="📧 Your Email" required>
-      <textarea placeholder="💡 Tell me about your project..." required></textarea>
-      <button type="submit">🚀 Send Message</button>
-    </form>
-  </div>
-</section> -->
-    </div>
-
-    <!-- Footer Waves -->
-    <!-- <div class="footer">
-      <img src="./assets/yellow-wave.png" id="w1" class="yellow-wave" alt="">
-      <img src="./assets/yellow-wave.png" id="w2" class="yellow-wave" alt="">
-      <img src="./assets/yellow-wave.png" id="w3" class="yellow-wave" alt="">
-      <img src="./assets/yellow-wave.png" id="w4" class="yellow-wave" alt="">
-    </div> -->
   </div>
 </template>
 
 <script>
-//import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faBriefcase, faToolbox, faCommentDots, faEnvelope } from '@fortawesome/free-solid-svg-icons'
 export default {
   components: {
+    // ProjectCard 
     // FontAwesomeIcon
   },
   name: "App",
@@ -141,6 +42,30 @@ export default {
       selected: "about",
       imageScale: 1,
       role: "",
+      projects: [
+        {
+          id: 1,
+          title: 'Portfolio Website',
+          description: 'Personal portfolio with animations and responsive design.',
+          image: require('@/assets/chatapp.jpg'),
+          link: 'https://yourdomain.com/portfolio',
+        },
+        {
+          id: 2,
+          title: 'E-commerce Store',
+          description: 'A modern e-commerce UI with cart and filter features.',
+          image: require('@/assets/chatapp.jpg'),
+          link: 'https://yourdomain.com/store',
+        },
+        {
+          id: 3,
+          title: 'Dashboard UI',
+          description: 'Analytics dashboard with charts and dark mode.',
+          image: require('@/assets/chatapp.jpg'),
+          link: 'https://yourdomain.com/dashboard',
+        },
+        // Add more projects here
+      ],
       skills: [
         { name: 'Vue.js', value: 0 },
         { name: 'Node.js', value: 0 },
@@ -167,9 +92,9 @@ export default {
   },
   methods: {
     switchSections(Event) {
-      
-        if(Event.deltaY > 55 || Event.deltaY < -55){
-          if (this.selected == 'about') {
+
+      if (Event.deltaY > 55 || Event.deltaY < -55) {
+        if (this.selected == 'about') {
           this.selected = 'work';
         }
         else if (this.selected == 'work') {
@@ -178,8 +103,8 @@ export default {
         else {
           this.selected = 'about';
         }
-        }
-      
+      }
+
     },
     animateName() {
       const name = "Japhet";
@@ -223,16 +148,6 @@ export default {
         this.imageScale = scrollFactor;
       }
     },
-    handleMouseMove(e) {
-      if(this.selected=='about'){
-        const container = document.querySelector('.intro-layout');
-      const illustration = document.querySelector('#illustration');
-      const rect = container.getBoundingClientRect();
-      const x = (e.clientX - rect.left - rect.width / 2) / 30;
-      const y = (e.clientY - rect.top - rect.height / 2) / 30;
-      illustration.style.transform = `scale(${this.imageScale}) translate(${x}px, ${y}px)`;
-      }
-    }
   }
 }
 </script>
@@ -264,6 +179,10 @@ body {
   display: flex;
   flex-direction: column;
 }
+.router-link{
+  text-decoration: none;
+
+}
 
 @keyframes lightning {
   0% {
@@ -294,11 +213,11 @@ body {
   padding: 1rem 2rem;
   display: flex;
   justify-content: center;
-  position: fixed;
   width: 100%;
   font-weight: 600;
   align-items: flex-end;
-  background: white;
+  
+  background-color: rgba(250, 235, 215, 0.507);
 }
 
 .zoom {
@@ -375,6 +294,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  position: relative;
   transition: transform 0.8s ease-in-out;
 }
 
@@ -387,10 +307,6 @@ body {
   width: 100%;
 }
 
-.section-content {
-  /* max-width: 900px; */
-  width: 100%;
-}
 
 .intro-layout {
   display: flex;
@@ -442,6 +358,7 @@ body {
   cursor: pointer;
   transition: background 0.3s;
 }
+
 .cta-button2 {
   background: var(--primary);
   color: white;
@@ -605,12 +522,7 @@ cite {
   font-weight: 700;
 }
 
-.subhead {
-  font-size: 1.2rem;
-  color: #666;
-  font-weight: 600;
-  margin-bottom: 1.5rem;
-}
+
 
 .projects li p {
   margin: 0.25rem 0 0;
@@ -670,61 +582,6 @@ cite {
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-.project-grid {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-}
-
-.project-card {
-  background: white;
-  padding: 2rem;
-  max-width: 300px;
-  margin: 10px;
-  cursor: pointer;
-  border-radius: 12px;
-  box-shadow: 1px 2px 15px -3px var(--primary);
-  text-align: left;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.project-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
-}
-
-.project-card h3 {
-  color: var(--primary);
-  margin-bottom: 0.75rem;
-  font-weight: 600;
-  font-size: 1.25rem;
-}
-
-.project-card p {
-  color: #6b6b6b;
-  font-weight: 500;
-  line-height: 1.4;
-}
-
-.project-card img {
-  width: 100%;
-  border-radius: 10px 10px 0 0;
-  height: 180px;
-  object-fit: cover;
-}
-
-.project-info {
-  padding-top: 1rem;
-}
-
-.project-card.featured {
-  grid-column: span 2;
-  grid-row: span 2;
 }
 
 
