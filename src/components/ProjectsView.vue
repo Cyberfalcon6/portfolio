@@ -9,7 +9,11 @@
               <img src="@/assets/portfolio.png" alt="Portfolio Website">
               <div class="project-info">
                 <h3> Portfolio Website </h3>
-                <p> Vue-based personal brand site with smooth animations and scroll effects. </p>
+                <p> Vue-based personal brand site. </p>
+              </div>
+                 <div class="project-links">
+                <div class="link"> <HugeiconsIcon :icon="Github01Icon" :size="25" color="white" /> <span class="text">  See on Github</span> </div>
+                <div class="link"><HugeiconsIcon :icon="InternetIcon" :size="25" color="white" /> <span class="text">Preview live</span> </div>
               </div>
             </div>
             <div class="project-card" :class="{'swayable': swayables.includes(2)}">
@@ -18,12 +22,20 @@
                 <h3>E-commerce Platform</h3>
                 <p>Full-stack store using Node.js, Stripe, and MongoDB, built for scale.</p>
               </div>
+              <div class="project-links">
+                <div class="link"> <HugeiconsIcon :icon="Github01Icon" :size="25" color="white" /> <span class="text">  See on Github</span> </div>
+                <div class="link"><HugeiconsIcon :icon="InternetIcon" :size="25" color="white" /> <span class="text">Preview live</span> </div>
+              </div>
             </div>
             <div class="project-card" :class="{'swayable': swayables.includes(3)}">
               <img src="@/assets/chatapp.jpg" alt="Chat App">
               <div class="project-info">
                 <h3> Real-time Chat App </h3>
                 <p> Socket.io-powered messaging with Vue.js front-end and JWT auth. </p>
+              </div>
+                 <div class="project-links">
+                <div class="link"> <HugeiconsIcon :icon="Github01Icon" :size="25" color="white" /> <span class="text">  See on Github</span> </div>
+                <div class="link"><HugeiconsIcon :icon="InternetIcon" :size="25" color="white" /> <span class="text">Preview live</span> </div>
               </div>
             </div>
           </div>
@@ -32,26 +44,25 @@
 
 </template>
 
-<script>
-    export default({
-        name: "ProjectsView",
-        data(){
-          return{
-            swayables: []
-          }
-        },
-        methods: {
+<script setup>
+import { ref, onMounted } from 'vue'
+import { HugeiconsIcon } from '@hugeicons/vue'
+import { Github01Icon } from '@hugeicons/core-free-icons/index'
+import { InternetIcon } from '@hugeicons/core-free-icons/index'
+const swayables = ref([])
 
-        },
-        mounted(){
-          
-        }
-    })
+onMounted(() => {
+  // mounted logic here
+})
+
+
 </script>
 
 
 <style scoped>
-
+*{
+  box-sizing: border-box;
+}
   .section-content{
     
   background-color: rgba(250, 235, 215, 0.507);
@@ -65,7 +76,6 @@
   height: 100%;
   overflow: auto;
 }
-
 .project-card {
   background: white;
   padding: 2rem;
@@ -77,6 +87,46 @@
   box-shadow: 1px 2px 15px -3px var(--primary);
   text-align: left;
   transition: all 0.3s ease;
+}
+
+.link{
+  background-color: var(--primary);
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 360px;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  align-items: center;
+  text-wrap: nowrap;
+  transition: all .2s ease-in-out;
+}
+.link:hover{
+  background-color: rgb(74, 9, 159);
+  width: 160px;
+  gap: 10px;
+}
+.link:hover .text{
+  visibility: visible;
+  opacity: 1;
+  width: fit-content;
+}
+.project-links{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px;
+  /* background-color: #666; */
+  align-items: center;
+  position: absolute;
+  bottom: 25px;
+}
+.link .text{
+  visibility: hidden;
+  opacity: 0;
+  width: 0;
+  transition: all .2s ease-in-out;
 }
 
 .swayable{
