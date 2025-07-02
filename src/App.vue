@@ -12,10 +12,12 @@
        <router-link to="/about" class="router-link"><div class="contact nav-link" :class="{ 'visible': $route.fullPath == '/about' }" v-on:click="selected = 'about'"> About me </div></router-link>
        <router-link to="/projects" class="router-link"> <div class="work nav-link" :class="{ 'visible': $route.fullPath == '/projects' }" v-on:click="selected = 'work'"> My Work
       </div></router-link>
+       <router-link to="/build" class="router-link"> <div class="build nav-link" :class="{ 'visible': $route.fullPath == '/build' }" v-on:click="selected = 'build'"> Let's build 
+      </div></router-link>
         
      
-      <div class="testimonials nav-link" :class="{ 'visible': $route.fullPath == '/testimonials' }"
-        v-on:click="selected = 'testimonials'"> Testimonials </div>
+      <router-link to="/brands" class="router-link"><div class="testimonials nav-link" :class="{ 'visible': $route.fullPath == '/testimonials' }"
+        v-on:click="selected = 'testimonials'" title="testimonials"> Brands </div></router-link>
     </nav>
     <div id="sections">
       <RouterView />

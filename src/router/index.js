@@ -3,6 +3,8 @@ import App from "@/App.vue";
 import BigScreen from "@/BigScreen.vue";
 import LandingPage from "@/components/LandingPage.vue";
 import ProjectsView from "@/components/ProjectsView.vue"
+import ContactForm from "@/components/ContactForm.vue";
+import BraNds from "@/components/BraNds.vue";
 const routes = [
     {
         path: "/",
@@ -19,6 +21,16 @@ const routes = [
                 path:"projects",
                 name: "projects",
                 component: ProjectsView
+            },
+            {
+                path:"build",
+                name: "build",
+                component: ContactForm
+            },
+            {
+                path:"brands",
+                name: "brands",
+                component: BraNds
             },
         ]
     },

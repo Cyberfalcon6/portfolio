@@ -4,8 +4,8 @@
             <div class="greeting"> Hey </div>
             <div class="introduction"> I'm <span class="name">{{ name }}</span></div>
             <div class="role" :class="{ 'zoom': zoom }" id="role">{{ role }}</div>
-            <button class="cta-button"> Get in touch </button>
-            <button class="cta-button2" style="background-color: black;"> See Projects </button>
+            <RouterLink to="/build"><button class="cta-button"> Get in touch </button></RouterLink>
+            <RouterLink to="/projects" id="project-link"><button class="cta-button2" style="background-color: black;"> See Projects </button></RouterLink>
           </div>
           <img src="@/assets/developer-illustration.png" id="illustration"
             :style="{ transform: `scale(${imageScale})` }" alt="Hero illustration">
@@ -76,6 +76,11 @@ export default({
   height: 100%px;
   position: absolute;
   width: 100%;
+}
+
+#project-link{
+  color: white !important;
+  text-decoration: none;
 }
 
 @media (min-width: 768px) {

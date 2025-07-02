@@ -28,14 +28,14 @@
               </div>
             </div>
             <div class="project-card" :class="{'swayable': swayables.includes(3)}">
-              <img src="@/assets/chatapp.jpg" alt="Chat App">
+              <img src="@/assets/cets.png" alt="CETS" width="100px">
               <div class="project-info">
-                <h3> Real-time Chat App </h3>
-                <p> Socket.io-powered messaging with Vue.js front-end and JWT auth. </p>
+                <h3> CETS website </h3>
+                <p> Full customised educational website </p>
               </div>
                  <div class="project-links">
                 <div class="link"> <HugeiconsIcon :icon="Github01Icon" :size="25" color="white" /> <span class="text">  See on Github</span> </div>
-                <div class="link"><HugeiconsIcon :icon="InternetIcon" :size="25" color="white" /> <span class="text">Preview live</span> </div>
+                <a href="https://cets.uk"><div class="link"><HugeiconsIcon :icon="InternetIcon" :size="25" color="white" /> <span class="text">Preview live</span> </div></a>
               </div>
             </div>
           </div>
