@@ -1,43 +1,19 @@
 <template>
 
-        <div class="section-content">
+        <div class="section-content p-4">
           <!-- <h2><font-awesome-icon :icon="faBriefcase" /> <span class="highlight">Featured Projects</span></h2> -->
           <p class="subhead"> A few things I've built recently </p>
           <!-- <ProjectCard :project="projects"/> -->
-          <div class="project-grid">
-            <div class="project-card" :class="{'swayable': swayables.includes(1)}">
-              <img src="@/assets/portfolio.png" alt="Portfolio Website">
-              <div class="project-info">
-                <h3> Portfolio Website </h3>
-                <p> Vue-based personal brand site. </p>
-              </div>
-                 <div class="project-links">
-                <div class="link"> <HugeiconsIcon :icon="Github01Icon" :size="25" color="white" /> <span class="text">  See on Github</span> </div>
-                <div class="link"><HugeiconsIcon :icon="InternetIcon" :size="25" color="white" /> <span class="text">Preview live</span> </div>
-              </div>
+          <div class="project-area flex">
+            <div class=""> Prev </div>
+            <div class="project-carousel flex">
+              <div class="project-photo"></div>
+            <div class="project-text">
+              <div class="project-title"></div>
+              <div class="project-description"></div>
             </div>
-            <div class="project-card" :class="{'swayable': swayables.includes(2)}">
-              <img src="@/assets/ecommerce.webp" alt="E-commerce Platform">
-              <div class="project-info">
-                <h3>E-commerce Platform</h3>
-                <p>Full-stack store using Node.js, Stripe, and MongoDB, built for scale.</p>
-              </div>
-              <div class="project-links">
-                <div class="link"> <HugeiconsIcon :icon="Github01Icon" :size="25" color="white" /> <span class="text">  See on Github</span> </div>
-                <div class="link"><HugeiconsIcon :icon="InternetIcon" :size="25" color="white" /> <span class="text">Preview live</span> </div>
-              </div>
             </div>
-            <div class="project-card" :class="{'swayable': swayables.includes(3)}">
-              <img src="@/assets/cets.png" alt="CETS" width="100px">
-              <div class="project-info">
-                <h3> CETS website </h3>
-                <p> Full customised educational website </p>
-              </div>
-                 <div class="project-links">
-                <div class="link"> <HugeiconsIcon :icon="Github01Icon" :size="25" color="white" /> <span class="text">  See on Github</span> </div>
-                <a href="https://cets.uk"><div class="link"><HugeiconsIcon :icon="InternetIcon" :size="25" color="white" /> <span class="text">Preview live</span> </div></a>
-              </div>
-            </div>
+            <div> Next </div>
           </div>
         </div>
       
@@ -46,10 +22,14 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { HugeiconsIcon } from '@hugeicons/vue'
-import { Github01Icon } from '@hugeicons/core-free-icons/index'
-import { InternetIcon } from '@hugeicons/core-free-icons/index'
-const swayables = ref([])
+// import { HugeiconsIcon } from '@hugeicons/vue'
+// import { Github01Icon } from '@hugeicons/core-free-icons/index'
+// import { InternetIcon } from '@hugeicons/core-free-icons/index'
+const swayables = ref([]);
+const projects = ref([]);
+
+
+
 
 onMounted(() => {
   // mounted logic here
@@ -65,7 +45,8 @@ onMounted(() => {
 }
   .section-content{
     
-  background-color: rgba(250, 235, 215, 0.507);
+  background-color: var(--primary);
+  overflow: hidden;
   }
 
   .project-grid {
@@ -73,7 +54,7 @@ onMounted(() => {
   flex-direction: row;
   justify-content: space-around;
   width: 100%;
-  height: 100%;
+  height: max-content;
   overflow: auto;
 }
 .project-card {
@@ -154,7 +135,7 @@ onMounted(() => {
 
 .subhead {
   font-size: 1.2rem;
-  color: #666;
+  color: #ffffff;
   font-weight: 600;
   margin-bottom: 1.5rem;
   margin-left: 20px;

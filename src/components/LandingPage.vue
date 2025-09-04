@@ -1,5 +1,6 @@
 <template>
-    <div class="intro-layout">
+    <div class="outer-shell flex flex-col h-[100%] overflow-auto flex-1">
+      <div class="intro-layout">
           <div class="group">
             <div class="greeting"> Hey </div>
             <div class="introduction"> I'm <span class="name">{{ name }}</span></div>
@@ -9,12 +10,31 @@
           </div>
           <img src="@/assets/developer-illustration.png" id="illustration"
             :style="{ transform: `scale(${imageScale})` }" alt="Hero illustration">
+            
         </div>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 200"
+     class="text-[var(--primary)] fill-current block mb-[-1px] w-full h-auto" preserveAspectRatio="none">
+  <g transform="scale(1,0.5) translate(0,80)">
+    <path fill="#36169a" fill-opacity="1" d="M0,224L34.3,229.3C68.6,235,137,245,206,218.7C274.3,192,343,128,411,128C480,128,549,192,617,224C685.7,256,754,256,823,229.3C891.4,203,960,149,1029,154.7C1097.1,160,1166,224,1234,229.3C1302.9,235,1371,181,1406,154.7L1440,128L1440,320L0,320Z"></path>
+  </g>
+  <g transform="scale(1.03,0.5) translate(0,70)">
+    <path fill="#36169a" fill-opacity="0.3" d="M0,224L34.3,229.3C68.6,235,137,245,206,218.7C274.3,192,343,128,411,128C480,128,549,192,617,224C685.7,256,754,256,823,229.3C891.4,203,960,149,1029,154.7C1097.1,160,1166,224,1234,229.3C1302.9,235,1371,181,1406,154.7L1440,128L1440,320L0,320Z"></path>
+  </g>
+</svg>
+<!-- <div class="line w-[full] h-[130px] bg-[var(--primary)]"></div> -->
+        <ProjectsView/>
+        <ContactForm />
+        <BraNds />
+    </div>
 </template>
 <script>
+import BraNds from './BraNds.vue';
+import ProjectsView from './ProjectsView.vue';
+import ContactForm from './ContactForm.vue';
 
 export default({
     name: "LandingPage",
+    components: {ProjectsView, BraNds, ContactForm},
     data(){
         return{
             selected: "about",
@@ -71,10 +91,9 @@ export default({
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: max-content;
   gap: 2rem;
   background-color: rgba(250, 235, 215, 0.507);
-  height: 100%px;
-  position: absolute;
   width: 100%;
 }
 
@@ -87,7 +106,6 @@ export default({
   .intro-layout {
     width: 100%;
     flex-direction: row;
-  height: 100%;
     justify-content: space-around;
   }
 }

@@ -1,21 +1,18 @@
-<!-- Updated design-focused, professional version of your web developer portfolio -->
+
 <template>
   <div id="shell">
-    <!-- Responsive Navigation -->
     <nav id="nav-small">
       <div class="logo padded"> 0X3B </div>
       <div class="work padded"> My Work </div>
       <div class="contact padded"> Reach me </div>
     </nav>
     <nav id="nav-big">
-      <div class="logo padded">0X3B</div>
+      <div class="logo padded"> 0X3B </div>
        <router-link to="/about" class="router-link"><div class="contact nav-link" :class="{ 'visible': $route.fullPath == '/about' }" v-on:click="selected = 'about'"> About me </div></router-link>
        <router-link to="/projects" class="router-link"> <div class="work nav-link" :class="{ 'visible': $route.fullPath == '/projects' }" v-on:click="selected = 'work'"> My Work
       </div></router-link>
        <router-link to="/build" class="router-link"> <div class="build nav-link" :class="{ 'visible': $route.fullPath == '/build' }" v-on:click="selected = 'build'"> Let's build 
       </div></router-link>
-        
-     
       <router-link to="/brands" class="router-link"><div class="testimonials nav-link" :class="{ 'visible': $route.fullPath == '/testimonials' }"
         v-on:click="selected = 'testimonials'" title="testimonials"> Brands </div></router-link>
     </nav>
@@ -24,7 +21,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import { faBriefcase, faToolbox, faCommentDots, faEnvelope } from '@fortawesome/free-solid-svg-icons'
 export default {
@@ -80,7 +76,7 @@ export default {
   },
   mounted() {
     document.addEventListener('mousemove', this.handleMouseMove);
-    window.addEventListener('wheel', this.switchSections);
+    // window.addEventListener('wheel', this.switchSections);
     this.animateSkills();
     this.animateName();
     // this.zoom = true;
@@ -88,12 +84,12 @@ export default {
   },
   unmounted() {
     document.removeEventListener('mousemove', this.handleMouseMove);
-    window.removeEventListener('scroll', this.switchSections()
-    );
+    // window.removeEventListener('scroll', this.switchSections()
+    // );
 
   },
   methods: {
-    switchSections(Event) {
+   /* switchSections(Event) {
 
       if (Event.deltaY > 55 || Event.deltaY < -55) {
         if (this.selected == 'about') {
@@ -107,7 +103,7 @@ export default {
         }
       }
 
-    },
+    },*/
     animateName() {
       const name = "Japhet";
       const role = "A full-stack web developer </> based in Kigali";
@@ -156,7 +152,7 @@ export default {
 
 <style>
 :root {
-  --primary: #673EE6;
+  --primary: #36169a;
   --secondary: #E6D53C;
   --tertiary: #FD5165;
   --gray: #F9F9FB;
@@ -176,7 +172,7 @@ body {
   width: 100%;
   height: 100vh;
   overflow-y: auto;
-  position: relative;
+  position: fixed;
   background: var(--gray);
   display: flex;
   flex-direction: column;
@@ -295,9 +291,8 @@ body {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 20px;
   position: relative;
-  transition: transform 0.8s ease-in-out;
+  transition: transform 0.5s ease-in-out;
 }
 
 .section {
